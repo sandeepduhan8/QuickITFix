@@ -1,7 +1,7 @@
 name: Deploy Jekyll site to Pages
 on:
   push:
-    branches: ["main"] # Change to "master" if your branch is named master
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -9,18 +9,29 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3' # Standard version for 2026
+          bundler-cache: true
       - name: Setup Pages
-        uses: actions/pages-configs@v1
+        uses: actions/configure-pages@v5 # Updated correct name
       - name: Build with Jekyll
         run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
 
   deploy:
     environment:
@@ -31,4 +42,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
