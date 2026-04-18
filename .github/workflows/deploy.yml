@@ -32,3 +32,10 @@ jobs:
       name: github-pages
     steps:
       - uses: actions/deploy-pages@v4
+
+- name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+          cache-version: 1 # Add this to force a fresh cache
