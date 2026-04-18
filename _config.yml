@@ -1,0 +1,8 @@
+title: Quick IT Fix
+description: IT Support and Solutions
+baseurl: "" 
+url: ""
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
