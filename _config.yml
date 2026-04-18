@@ -3,3 +3,5 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+url: "http://quickitfix.in"
+baseurl: ""
