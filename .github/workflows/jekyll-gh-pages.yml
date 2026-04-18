@@ -25,10 +25,10 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3' 
-          bundler-cache: true # This automatically runs 'bundle install' for you
+          bundler-cache: true # Automatically runs 'bundle install'
 
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v5 # Official action to prepare Pages
 
       - name: Build with Jekyll
         run: bundle exec jekyll build
@@ -38,7 +38,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Explicitly point to the Jekyll output folder
+          # Explicitly set to the Jekyll output folder to avoid 404s
           path: ./_site
 
   deploy:
