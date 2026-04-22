@@ -6,7 +6,7 @@ title: Home
 
 \---
 
-\# Quick IT Fix
+\# Welcome to Quick IT Fix
 
-The site is now rebuilding from scratch.
+The site is building correctly now.
 
