@@ -1,12 +1,232 @@
-\---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickITFix — Technology Knowledge Hub</title>
+  <meta name="description" content="Your go-to hub for IT knowledge, tech news, solutions, forums and quizzes." />
+  <link rel="stylesheet" href="assets/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+</head>
+<body>
 
-layout: home
+  <!-- NAV -->
+  <header class="nav-wrap">
+    <nav class="nav container">
+      <a href="index.html" class="logo">Quick<span>IT</span>Fix</a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
 
-title: Home
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="grid-lines"></div>
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+    </div>
+    <div class="container hero-content">
+      <div class="hero-badge">🚀 Knowledge · Solutions · Community</div>
+      <h1 class="hero-title">Your Ultimate<br/><span class="accent-text">IT Knowledge</span><br/>Hub</h1>
+      <p class="hero-sub">Stay ahead with cutting-edge tech articles, breaking IT news, expert solutions, community forums, and interactive quizzes — all in one place.</p>
+      <div class="hero-cta">
+        <a href="blog.html" class="btn btn-primary">Explore Articles</a>
+        <a href="services.html" class="btn btn-outline">Our Services</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">500+</span><span class="stat-label">Articles</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="stat-num">10K+</span><span class="stat-label">Readers</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Topics</span></div>
+      </div>
+    </div>
+  </section>
 
-\---
+  <!-- FEATURES -->
+  <section class="section features-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">What We Offer</p>
+        <h2 class="section-title">Everything IT, <span class="accent-text">One Place</span></h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📰</div>
+          <h3>Tech Articles</h3>
+          <p>In-depth knowledge-based articles covering the latest in software, hardware, networking, and beyond.</p>
+          <a href="blog.html" class="card-link">Read Articles →</a>
+        </div>
+        <div class="feature-card featured">
+          <div class="feature-icon">⚡</div>
+          <h3>IT News</h3>
+          <p>Breaking technology news, product launches, cybersecurity alerts and industry updates delivered fresh.</p>
+          <a href="blog.html" class="card-link">Latest News →</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔧</div>
+          <h3>Solutions & Fixes</h3>
+          <p>Step-by-step guides to fix common IT issues — Windows, Linux, networking, security and more.</p>
+          <a href="services.html" class="card-link">Find Solutions →</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3>Community Forum</h3>
+          <p>Ask questions, share insights, and collaborate with a community of IT professionals and enthusiasts.</p>
+          <a href="contact.html" class="card-link">Join Forum →</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🧠</div>
+          <h3>IT Quizzes</h3>
+          <p>Test your knowledge with interactive quizzes on networking, cloud, cybersecurity, and programming.</p>
+          <a href="services.html" class="card-link">Take a Quiz →</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎓</div>
+          <h3>Learning Paths</h3>
+          <p>Structured learning journeys for beginners to advanced — certifications, concepts, and hands-on labs.</p>
+          <a href="services.html" class="card-link">Start Learning →</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-\# Welcome to Quick IT Fix
+  <!-- LATEST ARTICLES -->
+  <section class="section articles-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Fresh Content</p>
+        <h2 class="section-title">Latest <span class="accent-text">Articles</span></h2>
+      </div>
+      <div class="articles-grid">
+        <article class="article-card large-card">
+          <div class="article-tag">Cybersecurity</div>
+          <h3>Top 10 Cybersecurity Threats in 2025 and How to Protect Yourself</h3>
+          <p>From AI-driven phishing to supply chain attacks — here's what every IT professional needs to watch out for this year.</p>
+          <div class="article-meta"><span>📅 Apr 20, 2025</span><span>⏱ 8 min read</span></div>
+          <a href="blog.html" class="card-link">Read More →</a>
+        </article>
+        <article class="article-card">
+          <div class="article-tag">Networking</div>
+          <h3>Understanding SD-WAN: A Beginner's Guide</h3>
+          <p>Software-defined networking is changing how enterprises manage connectivity. Here's everything you need to know.</p>
+          <div class="article-meta"><span>📅 Apr 18, 2025</span><span>⏱ 5 min read</span></div>
+          <a href="blog.html" class="card-link">Read More →</a>
+        </article>
+        <article class="article-card">
+          <div class="article-tag">Cloud</div>
+          <h3>AWS vs Azure vs GCP: Which Cloud is Right for You?</h3>
+          <p>A detailed comparison of the top three cloud platforms to help you make the best decision for your workloads.</p>
+          <div class="article-meta"><span>📅 Apr 15, 2025</span><span>⏱ 6 min read</span></div>
+          <a href="blog.html" class="card-link">Read More →</a>
+        </article>
+        <article class="article-card">
+          <div class="article-tag">Windows</div>
+          <h3>Fix: Windows 11 High CPU Usage — 7 Proven Solutions</h3>
+          <p>Is your CPU spiking to 100% for no reason? These tested fixes will get your PC running smoothly again.</p>
+          <div class="article-meta"><span>📅 Apr 12, 2025</span><span>⏱ 4 min read</span></div>
+          <a href="blog.html" class="card-link">Read More →</a>
+        </article>
+      </div>
+      <div class="center-btn">
+        <a href="blog.html" class="btn btn-outline">View All Articles</a>
+      </div>
+    </div>
+  </section>
 
-The site is now correctly building.
+  <!-- TOPICS -->
+  <section class="section topics-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Browse by Topic</p>
+        <h2 class="section-title">Popular <span class="accent-text">Topics</span></h2>
+      </div>
+      <div class="topics-grid">
+        <a href="blog.html" class="topic-chip">🔐 Cybersecurity</a>
+        <a href="blog.html" class="topic-chip">☁️ Cloud Computing</a>
+        <a href="blog.html" class="topic-chip">🌐 Networking</a>
+        <a href="blog.html" class="topic-chip">🪟 Windows</a>
+        <a href="blog.html" class="topic-chip">🐧 Linux</a>
+        <a href="blog.html" class="topic-chip">💻 Hardware</a>
+        <a href="blog.html" class="topic-chip">🤖 AI & ML</a>
+        <a href="blog.html" class="topic-chip">📱 Mobile Tech</a>
+        <a href="blog.html" class="topic-chip">🛠️ IT Support</a>
+        <a href="blog.html" class="topic-chip">📊 DevOps</a>
+        <a href="blog.html" class="topic-chip">🔎 Ethical Hacking</a>
+        <a href="blog.html" class="topic-chip">🧑‍💻 Programming</a>
+      </div>
+    </div>
+  </section>
 
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <div class="container cta-inner">
+      <div>
+        <h2>Stay Updated with IT Trends</h2>
+        <p>Get the latest articles, news and solutions delivered to your inbox weekly.</p>
+      </div>
+      <form class="cta-form" onsubmit="handleSubscribe(event)">
+        <input type="email" placeholder="Enter your email address" required />
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">Quick<span>IT</span>Fix</a>
+        <p>Your trusted hub for IT knowledge, tech news, solutions, forums, and quizzes.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Twitter">𝕏</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="GitHub">⌥</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="blog.html">Articles</a></li>
+          <li><a href="blog.html">IT News</a></li>
+          <li><a href="services.html">Solutions</a></li>
+          <li><a href="services.html">Quizzes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Forum</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Topics</h4>
+        <ul>
+          <li><a href="blog.html">Cybersecurity</a></li>
+          <li><a href="blog.html">Cloud</a></li>
+          <li><a href="blog.html">Networking</a></li>
+          <li><a href="blog.html">DevOps</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>© 2025 QuickITFix. All rights reserved.</p>
+      <div><a href="#">Privacy Policy</a> · <a href="#">Terms of Use</a></div>
+    </div>
+  </footer>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>

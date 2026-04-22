@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — QuickITFix</title>
+  <meta name="description" content="IT articles, tech news and knowledge guides on QuickITFix." />
+  <link rel="stylesheet" href="assets/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <header class="nav-wrap">
+    <nav class="nav container">
+      <a href="index.html" class="logo">Quick<span>IT</span>Fix</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="section-tag">Articles & News</p>
+      <h1>The <span class="accent-text">IT Blog</span></h1>
+      <p class="page-hero-sub">Knowledge-based articles, tech news, how-to guides and solutions from our community of IT experts.</p>
+    </div>
+  </section>
+
+  <!-- FILTER BAR -->
+  <section class="filter-bar-section">
+    <div class="container">
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterPosts('all', this)">All</button>
+        <button class="filter-btn" onclick="filterPosts('cybersecurity', this)">🔐 Cybersecurity</button>
+        <button class="filter-btn" onclick="filterPosts('cloud', this)">☁️ Cloud</button>
+        <button class="filter-btn" onclick="filterPosts('networking', this)">🌐 Networking</button>
+        <button class="filter-btn" onclick="filterPosts('windows', this)">🪟 Windows</button>
+        <button class="filter-btn" onclick="filterPosts('linux', this)">🐧 Linux</button>
+        <button class="filter-btn" onclick="filterPosts('devops', this)">📊 DevOps</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED POST -->
+  <section class="section" style="padding-top:2rem">
+    <div class="container">
+      <div class="featured-post" data-cat="cybersecurity">
+        <div class="featured-post-badge">⭐ Featured</div>
+        <div class="article-tag">Cybersecurity</div>
+        <h2>Top 10 Cybersecurity Threats in 2025 and How to Protect Yourself</h2>
+        <p>From AI-driven phishing to supply chain attacks and zero-day exploits — here's what every IT professional needs to watch out for in 2025, and concrete steps to defend against each threat.</p>
+        <div class="article-meta"><span>📅 April 20, 2025</span><span>⏱ 8 min read</span><span>👤 Sandeep Duhan</span></div>
+        <a href="#" class="btn btn-primary" style="margin-top:1.2rem">Read Full Article</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG GRID -->
+  <section class="section" style="padding-top:1rem">
+    <div class="container">
+      <div class="blog-grid" id="blogGrid">
+
+        <article class="blog-card" data-cat="networking">
+          <div class="blog-card-top">
+            <div class="article-tag">Networking</div>
+            <span class="read-time">⏱ 5 min</span>
+          </div>
+          <h3>Understanding SD-WAN: A Beginner's Complete Guide</h3>
+          <p>Software-defined networking is reshaping enterprise connectivity. We break it down from basics to real-world deployment.</p>
+          <div class="article-meta"><span>📅 Apr 18, 2025</span><span>👤 Rahul Kumar</span></div>
+          <a href="#" class="card-link">Read More →</a>
+        </article>
+
+        <article class="blog-card" data-cat="cloud">
+          <div class="blog-card-top">
+            <div class="article-tag">Cloud</div>
+            <span class="read-time">⏱ 6 min</span>
+          </div>
+          <h3>AWS vs Azure vs GCP: Which Cloud Platform is Right for You?</h3>
+          <p>A side-by-side comparison of pricing, performance, services and use cases for the big three cloud providers.</p>
+          <div class="article-meta"><span>📅 Apr 15, 2025</span><span>👤 Priya Sharma</span></div>
+          <a href="#" class="card-link">Read More →</a>
+        </article>
+
+        <article class="blog-card" data-cat="windows">
+          <div class="blog-card-top">
+            <div class="article-tag">Windows</div>
+            <span class="read-time">⏱ 4 min</span>
+          </div>
+          <h3>Fix: Windows 11 High CPU Usage — 7 Proven Solutions</h3>
+          <p>Is your CPU spiking to 100% for no apparent reason? These step-by-step fixes will get your PC back to normal.</p>
+          <div class="article-meta"><span>📅 Apr 12, 2025</span><span>👤 Sandeep Duhan</span></div>
+          <a href="#" class="card-link">Read More →</a>
+        </article>
+
+        <article class="blog-card" data-cat="linux">
+          <div class="blog-card-top">
+            <div class="article-tag">Linux</div>
+            <span class="read-time">⏱ 7 min</span>
+          </div>
+          <h3>Linux for Beginners: Essential Commands You Must Know</h3>
+          <p>Whether you're a student or switching from Windows, these 30 Linux commands will get you productive from day one.</p>
+          <div class="article-meta"><span>📅 Apr 10, 2025</span><span>👤 Rahul Kumar</span></div>
+          <a href="#" class="card-link">Read More →</a>
+        </article>
+
+        <article class="blog-card" data-cat="cybersecurity">
+          <div class="blog-card-top">
+            <div class="article-tag">Cybersecurity</div>
+            <span class="read-time">⏱ 5 min</span>
+          </div>
+          <h3>What is Zero Trust Architecture and Why Does It Matter?</h3>
+          <p>Zero Trust is more than a buzzword — it's a fundamental shift in how organizations approach network security in 2025.</p>
+          <div class="article-meta"><span>📅 Apr 8, 2025</span><span>👤 Sandeep Duhan</span></div>
+          <a href="#" class="card-link">Read More →</a>
+        </article>
+
+        <article class="blog-card" data-cat="devops">
+          <div class="blog-card-top">
+            <div class="article-tag">DevOps</div>
+            <span class="read-time">⏱ 6 min</span>
+          </div>
+          <h3>Docker vs Kubernetes: When to Use What</h3>
+          <p>Containers are everywhere, but Docker and Kubernetes serve different purposes. Here's a clear guide on choosing the right tool.</p>
+          <div class="article-meta"><span>📅 Apr 5, 2025</span><span>👤 Priya Sharma</span></div>
+          <a href="#" class="card-link">Read More →</a>
+        </article>
+
+        <article class="blog-card" data-cat="networking">
+          <div class="blog-card-top">
+            <div class="article-tag">Networking</div>
+            <span class="read-time">⏱ 4 min</span>
+          </div>
+          <h3>How to Set Up a Home Lab Network for IT Practice</h3>
+          <p>Build a fully functional home network lab for under ₹5000. Perfect for CCNA, CompTIA or general IT practice.</p>
+          <div class="article-meta"><span>📅 Apr 2, 2025</span><span>👤 Rahul Kumar</span></div>
+          <a href="#" class="card-link">Read More →</a>
+        </article>
+
+        <article class="blog-card" data-cat="cloud">
+          <div class="blog-card-top">
+            <div class="article-tag">Cloud</div>
+            <span class="read-time">⏱ 5 min</span>
+          </div>
+          <h3>Getting Started with AWS Free Tier: A Practical Guide</h3>
+          <p>Make the most of AWS's free tier without surprise bills. We walk you through the key services and usage limits.</p>
+          <div class="article-meta"><span>📅 Mar 28, 2025</span><span>👤 Priya Sharma</span></div>
+          <a href="#" class="card-link">Read More →</a>
+        </article>
+
+        <article class="blog-card" data-cat="windows">
+          <div class="blog-card-top">
+            <div class="article-tag">Windows</div>
+            <span class="read-time">⏱ 3 min</span>
+          </div>
+          <h3>How to Enable BitLocker Encryption on Windows 11</h3>
+          <p>Protect sensitive data on your Windows device with BitLocker. Step-by-step setup guide for Home and Pro editions.</p>
+          <div class="article-meta"><span>📅 Mar 25, 2025</span><span>👤 Sandeep Duhan</span></div>
+          <a href="#" class="card-link">Read More →</a>
+        </article>
+
+      </div>
+      <div class="center-btn" style="margin-top:3rem">
+        <button class="btn btn-outline">Load More Articles</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="container cta-inner">
+      <div>
+        <h2>Never Miss an Article</h2>
+        <p>Subscribe for weekly IT articles, news and tutorials delivered to your inbox.</p>
+      </div>
+      <form class="cta-form" onsubmit="handleSubscribe(event)">
+        <input type="email" placeholder="Enter your email address" required />
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">Quick<span>IT</span>Fix</a>
+        <p>Your trusted hub for IT knowledge, tech news, solutions, forums, and quizzes.</p>
+      </div>
+      <div class="footer-col"><h4>Explore</h4><ul><li><a href="blog.html">Articles</a></li><li><a href="services.html">Solutions</a></li><li><a href="services.html">Quizzes</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Topics</h4><ul><li><a href="blog.html">Cybersecurity</a></li><li><a href="blog.html">Cloud</a></li><li><a href="blog.html">Networking</a></li></ul></div>
+    </div>
+    <div class="footer-bottom container">
+      <p>© 2025 QuickITFix. All rights reserved.</p>
+      <div><a href="#">Privacy Policy</a> · <a href="#">Terms of Use</a></div>
+    </div>
+  </footer>
+
+  <script src="assets/script.js"></script>
+  <script>
+    function filterPosts(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.blog-card, .featured-post').forEach(card => {
+        if (cat === 'all' || card.dataset.cat === cat) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
