@@ -1,64 +1,32 @@
-name: Deploy Jekyll site to Pages
-
+name: Deploy Jekyll
 on:
   push:
     branches: ["main"]
-  workflow_dispatch:
-
 permissions:
   contents: read
   pages: write
   id-token: write
-
-# Allow only one concurrent deployment
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: .
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-         # This forces the code to be placed directly in the workspace root
-         path: '.'
-
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'
-          # We set this to true now because we want GitHub to 
-          # manage the gems correctly to avoid "command not found"
-          bundler-cache: true 
-
+          bundler-cache: true
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      
-      - name: Check Files
-        run: |
-          echo "Looking for files in:"
-          pwd
-          ls -la
-
       - name: Build with Jekyll
-        run: bundle exec jekyll build --config _config.yml
-        env:
-          JEKYLL_ENV: production
-
+        run: bundle exec jekyll build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
-
   deploy:
+    runs-on: ubuntu-latest
+    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

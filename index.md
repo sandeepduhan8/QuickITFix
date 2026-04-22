@@ -8,5 +8,5 @@ title: Home
 
 \# Welcome to Quick IT Fix
 
-The site is building correctly now.
+The site is now correctly building.
 
