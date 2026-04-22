@@ -33,3 +33,8 @@ jobs:
       name: github-pages
     steps:
       - uses: actions/deploy-pages@v4
+
+    - name: Build Site
+      run: |
+         bundle install
+         bundle exec jekyll build --config _config.yml
