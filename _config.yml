@@ -2,6 +2,8 @@ title: Quick IT Fix
 url: "https://quickitfix.in"
 baseurl: ""
 theme: minima
+minima:
+  skin: classic
 remote_theme: jekyll/minima
 plugins:
   - jekyll-feed
