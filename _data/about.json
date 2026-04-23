@@ -1,0 +1,25 @@
+{
+  "mission_title": "Making IT Knowledge Accessible to Everyone",
+  "mission_text": "QuickITFix was born from a simple frustration: finding reliable, practical IT solutions online was too hard. Too many outdated tutorials, too many forum posts that went nowhere, too much jargon with too little clarity.",
+  "mission_text2": "We set out to change that — by creating a single, trusted destination where IT knowledge is clear, current, and community-powered.",
+  "team": [
+    {
+      "name": "Sandeep Duhan",
+      "initials": "SD",
+      "role": "Founder & IT Architect",
+      "bio": "10+ years in IT infrastructure, networking and cloud solutions. Passionate about making tech knowledge accessible."
+    },
+    {
+      "name": "Rahul Kumar",
+      "initials": "RK",
+      "role": "Cybersecurity Writer",
+      "bio": "Certified ethical hacker and security researcher covering the latest threats, vulnerabilities and defense strategies."
+    },
+    {
+      "name": "Priya Sharma",
+      "initials": "PS",
+      "role": "Cloud & DevOps Expert",
+      "bio": "AWS and Azure certified professional sharing practical guides on cloud architecture and DevOps pipelines."
+    }
+  ]
+}

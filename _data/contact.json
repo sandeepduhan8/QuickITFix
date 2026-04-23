@@ -1,0 +1,12 @@
+{
+  "email": "hello@quickitfix.in",
+  "location": "Gurugram, Haryana, India",
+  "faqs": [
+    { "question": "Is QuickITFix free to use?", "answer": "Yes! All articles, guides, solutions and quizzes are completely free. We believe IT knowledge should be accessible to everyone." },
+    { "question": "Can I submit an article or guide?", "answer": "Absolutely. We welcome contributions from IT professionals and enthusiasts. Use the contact form and select Submit an Article as the subject." },
+    { "question": "How do I join the community forum?", "answer": "The forum is coming soon! Register your interest via the contact form and we'll notify you as soon as it launches." },
+    { "question": "How often is content updated?", "answer": "New articles are published multiple times per week. Breaking news and security alerts are posted as they happen." },
+    { "question": "Do you cover certification exam prep?", "answer": "Yes! We have dedicated content for CompTIA A+, Network+, Security+, AWS, Azure and ITIL certifications including quizzes and learning paths." },
+    { "question": "Can I advertise or partner with QuickITFix?", "answer": "We're open to partnerships, sponsorships and collaborations with IT companies and education providers. Reach out via the contact form with Partnership as the subject." }
+  ]
+}
