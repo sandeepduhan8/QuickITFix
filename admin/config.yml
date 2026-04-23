@@ -4,7 +4,7 @@ backend:
   branch: main
   base_url: https://api.netlify.com
   auth_endpoint: auth
-  site_domain: quickitfix.netlify.app
+  site_id: b7369ed3-ca53-4402-aa73-d3018bdb0979
 
 media_folder: "assets/images"
 public_folder: "/assets/images"
