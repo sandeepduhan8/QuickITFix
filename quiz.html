@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IT Quizzes — QuickITFix</title>
+  <meta name="description" content="Test your IT knowledge with interactive quizzes on Networking, Cybersecurity, Cloud, Linux and more." />
+  <link rel="stylesheet" href="assets/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    .quiz-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .quiz-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); padding: 1.8rem; cursor: pointer; transition: all .25s; }
+    .quiz-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: #60a5fa; }
+    .quiz-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+    .quiz-topic-badge { background: var(--blue-50); color: var(--blue-700); font-size: .75rem; font-weight: 700; padding: .25rem .7rem; border-radius: 50px; }
+    .quiz-difficulty { font-size: .75rem; font-weight: 600; padding: .25rem .7rem; border-radius: 50px; }
+    .difficulty-beginner { background: #f0fdf4; color: #166534; }
+    .difficulty-intermediate { background: #fffbeb; color: #92400e; }
+    .difficulty-advanced { background: #fef2f2; color: #991b1b; }
+    .quiz-card h3 { font-size: 1.05rem; margin-bottom: .6rem; line-height: 1.4; }
+    .quiz-card p { color: var(--text-muted); font-size: .88rem; margin-bottom: 1.2rem; line-height: 1.6; }
+    .quiz-card-footer { display: flex; justify-content: space-between; align-items: center; }
+    .quiz-meta { display: flex; gap: 1rem; }
+    .quiz-meta span { font-size: .8rem; color: var(--text-muted); }
+    .quiz-start-btn { background: var(--gradient); color: var(--white); border: none; padding: .5rem 1.2rem; border-radius: 50px; font-family: 'Syne', sans-serif; font-weight: 600; font-size: .85rem; cursor: pointer; transition: all .2s; }
+    .quiz-start-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37,99,235,.3); }
+    .quiz-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 200; align-items: center; justify-content: center; padding: 1.5rem; }
+    .quiz-modal-overlay.open { display: flex; }
+    .quiz-modal { background: var(--white); border-radius: var(--radius-lg); width: 100%; max-width: 680px; max-height: 90vh; overflow-y: auto; padding: 2.5rem; position: relative; animation: fadeUp .3s ease; }
+    .modal-close { position: absolute; top: 1.2rem; right: 1.5rem; background: var(--gray-100); border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+    .modal-close:hover { background: var(--gray-200); }
+    .modal-header { margin-bottom: 1.5rem; }
+    .modal-header h2 { font-size: 1.4rem; margin: .5rem 0 .4rem; }
+    .modal-header p { color: var(--text-muted); font-size: .9rem; }
+    .modal-meta { display: flex; gap: 1rem; margin-top: .8rem; flex-wrap: wrap; }
+    .modal-meta span { background: var(--gray-100); padding: .3rem .8rem; border-radius: 50px; font-size: .8rem; font-weight: 500; }
+    .quiz-progress-bar { background: var(--gray-200); border-radius: 50px; height: 6px; margin-bottom: 1.5rem; overflow: hidden; }
+    .quiz-progress-fill { height: 100%; background: var(--gradient); border-radius: 50px; transition: width .4s ease; }
+    .quiz-progress-text { display: flex; justify-content: space-between; font-size: .82rem; color: var(--text-muted); margin-bottom: .5rem; }
+    .question-num { font-size: .82rem; color: var(--blue-600); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-bottom: .5rem; }
+    .question-text { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.4; }
+    .options-grid { display: flex; flex-direction: column; gap: .8rem; margin-bottom: 1.5rem; }
+    .option-btn { padding: .9rem 1.2rem; border: 2px solid var(--gray-200); border-radius: var(--radius); background: var(--white); font-family: 'DM Sans', sans-serif; font-size: .95rem; text-align: left; cursor: pointer; transition: all .2s; display: flex; align-items: center; gap: .8rem; }
+    .option-btn:hover:not(:disabled) { border-color: var(--blue-500); background: var(--blue-50); }
+    .option-btn.correct { border-color: #22c55e; background: #f0fdf4; color: #166534; }
+    .option-btn.wrong { border-color: #ef4444; background: #fef2f2; color: #991b1b; }
+    .option-letter { width: 28px; height: 28px; background: var(--gray-100); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .82rem; flex-shrink: 0; }
+    .option-btn.correct .option-letter { background: #22c55e; color: white; }
+    .option-btn.wrong .option-letter { background: #ef4444; color: white; }
+    .explanation-box { display: none; background: var(--blue-50); border: 1px solid #dbeafe; border-radius: var(--radius); padding: 1rem 1.2rem; margin-bottom: 1.2rem; font-size: .9rem; color: #1e40af; line-height: 1.6; }
+    .explanation-box.show { display: block; }
+    .quiz-nav { display: flex; justify-content: space-between; align-items: center; }
+    .score-display { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--blue-700); }
+    .quiz-results { display: none; text-align: center; padding: 1rem 0; }
+    .quiz-results.show { display: block; }
+    .result-score-circle { width: 120px; height: 120px; border-radius: 50%; background: var(--gradient); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--white); }
+    .result-score-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; line-height: 1; }
+    .result-score-label { font-size: .75rem; opacity: .8; }
+    .result-message { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: .5rem; }
+    .result-sub { color: var(--text-muted); margin-bottom: 2rem; }
+    .result-breakdown { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; }
+    .result-stat { text-align: center; }
+    .result-stat-num { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; }
+    .result-stat-label { font-size: .82rem; color: var(--text-muted); }
+    .correct-count { color: #22c55e; }
+    .wrong-count { color: #ef4444; }
+    .quiz-loading { text-align: center; padding: 4rem 0; color: var(--text-muted); }
+    .spinner { width: 40px; height: 40px; border: 3px solid var(--gray-200); border-top-color: var(--blue-600); border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 1rem; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .no-quizzes { text-align: center; padding: 4rem 0; color: var(--text-muted); }
+    .no-quizzes .icon { font-size: 3rem; margin-bottom: 1rem; }
+    @media (max-width: 768px) { .quiz-grid { grid-template-columns: 1fr; } .quiz-modal { padding: 1.5rem; } }
+  </style>
+</head>
+<body>
+
+  <header class="nav-wrap">
+    <nav class="nav container">
+      <a href="index.html" class="logo">Quick<span>IT</span>Fix</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="quiz.html" class="active">Quizzes</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="section-tag">Test Your Knowledge</p>
+      <h1>IT <span class="accent-text">Quizzes</span></h1>
+      <p class="page-hero-sub">Challenge yourself with topic-specific quizzes on Networking, Cybersecurity, Cloud, Linux and more.</p>
+    </div>
+  </section>
+
+  <section class="filter-bar-section">
+    <div class="container">
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterQuizzes('all', this)">All</button>
+        <button class="filter-btn" onclick="filterQuizzes('networking', this)">🌐 Networking</button>
+        <button class="filter-btn" onclick="filterQuizzes('cybersecurity', this)">🔐 Cybersecurity</button>
+        <button class="filter-btn" onclick="filterQuizzes('cloud', this)">☁️ Cloud</button>
+        <button class="filter-btn" onclick="filterQuizzes('linux', this)">🐧 Linux</button>
+        <button class="filter-btn" onclick="filterQuizzes('windows', this)">🪟 Windows</button>
+        <button class="filter-btn" onclick="filterQuizzes('devops', this)">📊 DevOps</button>
+        <button class="filter-btn" onclick="filterQuizzes('comptia', this)">🎓 CompTIA</button>
+        <button class="filter-btn" onclick="filterQuizzes('aws', this)">☁️ AWS</button>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--blue-900);padding:2rem 0;">
+    <div class="container" style="display:flex;gap:3rem;justify-content:center;flex-wrap:wrap;">
+      <div style="text-align:center;color:white;"><div id="totalQuizzes" style="font-family:Syne,sans-serif;font-size:2rem;font-weight:800;background:linear-gradient(135deg,#3b82f6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">0</div><div style="color:rgba(255,255,255,.6);font-size:.85rem;margin-top:.2rem;">Total Quizzes</div></div>
+      <div style="text-align:center;color:white;"><div id="totalQuestions" style="font-family:Syne,sans-serif;font-size:2rem;font-weight:800;background:linear-gradient(135deg,#3b82f6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">0</div><div style="color:rgba(255,255,255,.6);font-size:.85rem;margin-top:.2rem;">Total Questions</div></div>
+      <div style="text-align:center;color:white;"><div style="font-family:Syne,sans-serif;font-size:2rem;font-weight:800;background:linear-gradient(135deg,#3b82f6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Free</div><div style="color:rgba(255,255,255,.6);font-size:.85rem;margin-top:.2rem;">Always Free</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div id="quizLoading" class="quiz-loading"><div class="spinner"></div><p>Loading quizzes...</p></div>
+      <div class="quiz-grid" id="quizGrid" style="display:none;"></div>
+      <div class="no-quizzes" id="noQuizzes" style="display:none;"><div class="icon">🧠</div><h3>No quizzes found</h3><p>Try a different filter or check back soon!</p></div>
+    </div>
+  </section>
+
+  <div class="quiz-modal-overlay" id="quizModal">
+    <div class="quiz-modal">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div id="quizIntro">
+        <div class="modal-header">
+          <div id="modalTopic" class="quiz-topic-badge">Topic</div>
+          <h2 id="modalTitle">Quiz Title</h2>
+          <p id="modalDesc">Description</p>
+          <div class="modal-meta">
+            <span id="modalDifficulty">Beginner</span>
+            <span id="modalDuration">⏱ 10 mins</span>
+            <span id="modalQCount">❓ 0 Questions</span>
+          </div>
+        </div>
+        <div style="background:var(--gray-50);border-radius:var(--radius);padding:1.2rem;margin-bottom:1.5rem;">
+          <p style="font-size:.9rem;color:var(--text-muted);margin:0;">💡 <strong>How it works:</strong> Read each question carefully and select the best answer. You'll see an explanation after each answer. Your score is shown at the end.</p>
+        </div>
+        <button class="btn btn-primary" onclick="startQuiz()" style="width:100%;justify-content:center;font-size:1rem;">Start Quiz 🚀</button>
+      </div>
+      <div id="quizPlay" style="display:none;">
+        <div class="quiz-progress-text"><span id="questionCounter">Question 1 of 10</span><span class="score-display" id="liveScore">Score: 0</span></div>
+        <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progressFill" style="width:0%"></div></div>
+        <div class="question-num" id="questionNum">Question 1</div>
+        <div class="question-text" id="questionText">Question goes here</div>
+        <div class="options-grid" id="optionsGrid"></div>
+        <div class="explanation-box" id="explanationBox"></div>
+        <div class="quiz-nav"><div></div><button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" style="display:none;">Next Question →</button></div>
+      </div>
+      <div class="quiz-results" id="quizResults">
+        <div class="result-score-circle"><div class="result-score-num" id="resultPercent">0%</div><div class="result-score-label">Score</div></div>
+        <div class="result-message" id="resultMessage">Well done!</div>
+        <div class="result-sub" id="resultSub">Here's how you did:</div>
+        <div class="result-breakdown">
+          <div class="result-stat"><div class="result-stat-num correct-count" id="correctCount">0</div><div class="result-stat-label">Correct</div></div>
+          <div class="result-stat"><div class="result-stat-num wrong-count" id="wrongCount">0</div><div class="result-stat-label">Incorrect</div></div>
+          <div class="result-stat"><div class="result-stat-num" id="totalCount">0</div><div class="result-stat-label">Total</div></div>
+        </div>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="restartQuiz()">Retry Quiz 🔄</button>
+          <button class="btn btn-outline" onclick="closeModal()">Back to Quizzes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="cta-banner">
+    <div class="container cta-inner">
+      <div><h2>Want to Suggest a Quiz Topic?</h2><p>Let us know what IT topics you'd like to be tested on!</p></div>
+      <a href="contact.html" class="btn btn-primary">Suggest a Topic</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand"><a href="index.html" class="logo">Quick<span>IT</span>Fix</a><p>Your trusted hub for IT knowledge, tech news, solutions, forums, and quizzes.</p></div>
+      <div class="footer-col"><h4>Explore</h4><ul><li><a href="blog.html">Articles</a></li><li><a href="services.html">Solutions</a></li><li><a href="quiz.html">Quizzes</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Topics</h4><ul><li><a href="blog.html">Cybersecurity</a></li><li><a href="blog.html">Cloud</a></li><li><a href="blog.html">Networking</a></li></ul></div>
+    </div>
+    <div class="footer-bottom container"><p>© 2025 QuickITFix. All rights reserved.</p><div><a href="#">Privacy Policy</a> · <a href="#">Terms of Use</a></div></div>
+  </footer>
+
+  <script src="assets/script.js"></script>
+  <script>
+    let allQuizzes = [], currentQuiz = null, currentQuestion = 0, score = 0, answered = false;
+
+    async function loadQuizzes() {
+      try {
+        const res = await fetch('https://api.github.com/repos/sandeepduhan8/QuickITFix/contents/_quizzes');
+        if (!res.ok) throw new Error('Failed');
+        const files = await res.json();
+        const quizPromises = files.filter(f => f.name.endsWith('.md')).map(f => fetch(f.download_url).then(r => r.text()).then(text => parseQuizMd(text, f.name)));
+        allQuizzes = (await Promise.all(quizPromises)).filter(q => q && q.published !== false);
+        document.getElementById('totalQuizzes').textContent = allQuizzes.length;
+        document.getElementById('totalQuestions').textContent = allQuizzes.reduce((a, q) => a + (q.questions?.length || 0), 0);
+        renderQuizzes(allQuizzes);
+      } catch (err) {
+        allQuizzes = getSampleQuizzes();
+        document.getElementById('totalQuizzes').textContent = allQuizzes.length;
+        document.getElementById('totalQuestions').textContent = allQuizzes.reduce((a, q) => a + q.questions.length, 0);
+        renderQuizzes(allQuizzes);
+      }
+    }
+
+    function parseQuizMd(text, filename) {
+      try {
+        const fmMatch = text.match(/^---\n([\s\S]*?)\n---/);
+        if (!fmMatch) return null;
+        const fm = fmMatch[1];
+        const get = (key) => { const m = fm.match(new RegExp(`^${key}:\\s*(.+)$`, 'm')); return m ? m[1].trim().replace(/^["']|["']$/g, '') : ''; };
+        const questions = [];
+        const qBlocks = fm.split(/\s*-\s+question:/g).slice(1);
+        qBlocks.forEach(block => {
+          const qText = block.match(/^(.+)/)?.[1]?.trim().replace(/^["']|["']$/g, '') || '';
+          const correct = block.match(/correct:\s*["']?([^"'\n]+)["']?/)?.[1]?.trim() || '';
+          const explanation = block.match(/explanation:\s*["']?([^"'\n]+)["']?/)?.[1]?.trim() || '';
+          const opts = [];
+          const optMatches = block.matchAll(/- option:\s*["']?([^"'\n]+)["']?/g);
+          for (const m of optMatches) opts.push(m[1].trim());
+          if (qText && opts.length) questions.push({ question: qText, options: opts, correct, explanation });
+        });
+        return { id: filename.replace('.md',''), title: get('title'), topic: get('topic'), difficulty: get('difficulty') || 'Beginner', duration: get('duration') || '10 mins', description: get('description'), published: get('published') !== 'false', questions };
+      } catch(e) { return null; }
+    }
+
+    function getSampleQuizzes() {
+      return [
+        { id: 'networking-basics', title: 'Networking Basics Quiz', topic: 'networking', difficulty: 'Beginner', duration: '5 mins', description: 'Test your knowledge of fundamental networking concepts.', questions: [
+          { question: 'What does DNS stand for?', options: ['Domain Name System','Dynamic Network Service','Data Node Server','Distributed Name System'], correct: 'Domain Name System', explanation: 'DNS translates domain names into IP addresses.' },
+          { question: 'Which port does HTTPS use?', options: ['80','443','21','8080'], correct: '443', explanation: 'HTTPS uses port 443 for secure encrypted communication.' },
+          { question: 'What does DHCP stand for?', options: ['Dynamic Host Configuration Protocol','Digital Host Control Protocol','Data Hub Connection Point','Direct Host Communication Protocol'], correct: 'Dynamic Host Configuration Protocol', explanation: 'DHCP automatically assigns IP addresses to devices.' },
+          { question: 'Which device connects different networks?', options: ['Switch','Hub','Router','Repeater'], correct: 'Router', explanation: 'A router forwards data packets between networks.' }
+        ]},
+        { id: 'cybersecurity-basics', title: 'Cybersecurity Fundamentals', topic: 'cybersecurity', difficulty: 'Intermediate', duration: '8 mins', description: 'Test your knowledge of core cybersecurity concepts and threats.', questions: [
+          { question: 'What is phishing?', options: ['A type of malware','A social engineering attack via fake emails','A network scanning technique','A password cracking method'], correct: 'A social engineering attack via fake emails', explanation: 'Phishing tricks users into revealing sensitive info through deceptive emails.' },
+          { question: 'What does MFA stand for?', options: ['Multi-Factor Authentication','Multiple File Access','Managed Firewall Application','Master File Archive'], correct: 'Multi-Factor Authentication', explanation: 'MFA requires two or more verification factors to access an account.' },
+          { question: 'What is a zero-day vulnerability?', options: ['A bug fixed in zero days','An unknown vulnerability with no patch','A vulnerability at midnight','A security issue in new software'], correct: 'An unknown vulnerability with no patch', explanation: 'Zero-day vulnerabilities are unknown to vendors with no patch available.' }
+        ]},
+        { id: 'cloud-basics', title: 'Cloud Computing Essentials', topic: 'cloud', difficulty: 'Beginner', duration: '6 mins', description: 'Test your understanding of cloud computing concepts and models.', questions: [
+          { question: 'What does IaaS stand for?', options: ['Infrastructure as a Service','Internet as a Service','Integration as a Service','Information as a Service'], correct: 'Infrastructure as a Service', explanation: 'IaaS provides virtualized computing resources over the internet.' },
+          { question: 'What is auto-scaling?', options: ['Automatically updating software','Automatically adjusting resources based on demand','Scaling server racks physically','Automatic backup scheduling'], correct: 'Automatically adjusting resources based on demand', explanation: 'Auto-scaling dynamically adjusts compute resources to handle varying loads.' }
+        ]},
+        { id: 'linux-commands', title: 'Linux Command Line Quiz', topic: 'linux', difficulty: 'Intermediate', duration: '7 mins', description: 'Test your knowledge of essential Linux commands.', questions: [
+          { question: 'Which command lists files?', options: ['dir','ls','list','show'], correct: 'ls', explanation: 'ls lists directory contents. Use ls -la for detailed listing.' },
+          { question: 'What does chmod 755 do?', options: ['Deletes a file','Changes ownership','Sets read/write/execute permissions','Mounts filesystem'], correct: 'Sets read/write/execute permissions', explanation: 'chmod 755 gives owner full permissions and group/others read+execute.' },
+          { question: 'What does grep do?', options: ['Creates files','Searches text patterns','Compresses files','Copies directories'], correct: 'Searches text patterns', explanation: 'grep searches for patterns in text files.' }
+        ]}
+      ];
+    }
+
+    function topicLabel(topic) {
+      const labels = { networking:'🌐 Networking', cybersecurity:'🔐 Cybersecurity', cloud:'☁️ Cloud', linux:'🐧 Linux', windows:'🪟 Windows', devops:'📊 DevOps', comptia:'🎓 CompTIA', aws:'☁️ AWS', azure:'🔵 Azure', ai:'🤖 AI & ML', hardware:'💻 Hardware', programming:'🧑‍💻 Programming', itil:'📋 ITIL' };
+      return labels[topic] || topic;
+    }
+
+    function renderQuizzes(quizzes) {
+      document.getElementById('quizLoading').style.display = 'none';
+      const grid = document.getElementById('quizGrid');
+      const none = document.getElementById('noQuizzes');
+      if (!quizzes.length) { grid.style.display = 'none'; none.style.display = 'block'; return; }
+      grid.style.display = 'grid'; none.style.display = 'none';
+      grid.innerHTML = quizzes.map(q => `
+        <div class="quiz-card" data-topic="${q.topic}" onclick="openQuiz('${q.id}')">
+          <div class="quiz-card-header"><div class="quiz-topic-badge">${topicLabel(q.topic)}</div><div class="quiz-difficulty difficulty-${q.difficulty.toLowerCase()}">${q.difficulty}</div></div>
+          <h3>${q.title}</h3><p>${q.description}</p>
+          <div class="quiz-card-footer"><div class="quiz-meta"><span>⏱ ${q.duration}</span><span>❓ ${q.questions.length} Questions</span></div><button class="quiz-start-btn">Start →</button></div>
+        </div>`).join('');
+    }
+
+    function filterQuizzes(topic, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderQuizzes(topic === 'all' ? allQuizzes : allQuizzes.filter(q => q.topic === topic));
+    }
+
+    function openQuiz(id) {
+      currentQuiz = allQuizzes.find(q => q.id === id);
+      if (!currentQuiz) return;
+      document.getElementById('modalTopic').textContent = topicLabel(currentQuiz.topic);
+      document.getElementById('modalTitle').textContent = currentQuiz.title;
+      document.getElementById('modalDesc').textContent = currentQuiz.description;
+      document.getElementById('modalDifficulty').textContent = currentQuiz.difficulty;
+      document.getElementById('modalDuration').textContent = '⏱ ' + currentQuiz.duration;
+      document.getElementById('modalQCount').textContent = '❓ ' + currentQuiz.questions.length + ' Questions';
+      document.getElementById('quizIntro').style.display = 'block';
+      document.getElementById('quizPlay').style.display = 'none';
+      document.getElementById('quizResults').classList.remove('show');
+      document.getElementById('quizModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() { document.getElementById('quizModal').classList.remove('open'); document.body.style.overflow = ''; currentQuiz = null; currentQuestion = 0; score = 0; }
+    document.getElementById('quizModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
+    function startQuiz() { currentQuestion = 0; score = 0; answered = false; document.getElementById('quizIntro').style.display = 'none'; document.getElementById('quizPlay').style.display = 'block'; document.getElementById('quizResults').classList.remove('show'); renderQuestion(); }
+
+    function renderQuestion() {
+      const q = currentQuiz.questions[currentQuestion];
+      const total = currentQuiz.questions.length;
+      const letters = ['A','B','C','D'];
+      document.getElementById('questionCounter').textContent = `Question ${currentQuestion+1} of ${total}`;
+      document.getElementById('liveScore').textContent = `Score: ${score}`;
+      document.getElementById('questionNum').textContent = `Question ${currentQuestion+1}`;
+      document.getElementById('questionText').textContent = q.question;
+      document.getElementById('progressFill').style.width = `${(currentQuestion/total)*100}%`;
+      document.getElementById('explanationBox').classList.remove('show');
+      document.getElementById('nextBtn').style.display = 'none';
+      answered = false;
+      document.getElementById('optionsGrid').innerHTML = q.options.map((opt,i) => `<button class="option-btn" onclick="selectAnswer(this,'${opt.replace(/'/g,"\\'")}')"><span class="option-letter">${letters[i]}</span><span>${opt}</span></button>`).join('');
+    }
+
+    function selectAnswer(btn, selected) {
+      if (answered) return;
+      answered = true;
+      const q = currentQuiz.questions[currentQuestion];
+      const allOpts = document.querySelectorAll('.option-btn');
+      allOpts.forEach(b => b.disabled = true);
+      const isCorrect = selected === q.correct;
+      if (isCorrect) { btn.classList.add('correct'); score++; }
+      else { btn.classList.add('wrong'); allOpts.forEach(b => { if (b.querySelector('span:last-child').textContent === q.correct) b.classList.add('correct'); }); }
+      document.getElementById('liveScore').textContent = `Score: ${score}`;
+      if (q.explanation) { const eb = document.getElementById('explanationBox'); eb.textContent = '💡 ' + q.explanation; eb.classList.add('show'); }
+      const nb = document.getElementById('nextBtn');
+      nb.style.display = 'inline-flex';
+      nb.textContent = currentQuestion < currentQuiz.questions.length-1 ? 'Next Question →' : 'See Results 🎉';
+    }
+
+    function nextQuestion() { currentQuestion++; if (currentQuestion < currentQuiz.questions.length) renderQuestion(); else showResults(); }
+
+    function showResults() {
+      document.getElementById('quizPlay').style.display = 'none';
+      document.getElementById('quizResults').classList.add('show');
+      const total = currentQuiz.questions.length, percent = Math.round((score/total)*100), wrong = total-score;
+      document.getElementById('resultPercent').textContent = percent+'%';
+      document.getElementById('correctCount').textContent = score;
+      document.getElementById('wrongCount').textContent = wrong;
+      document.getElementById('totalCount').textContent = total;
+      document.getElementById('progressFill').style.width = '100%';
+      const msgs = percent>=90?['🏆 Outstanding!','Excellent IT knowledge!']:percent>=75?['🎉 Great Job!','Solid understanding!']:percent>=60?['👍 Good Effort!','Keep studying!']:percent>=40?['📚 Keep Learning!','Review and retry!']:['💪 Don\'t Give Up!','Read up and retry!'];
+      document.getElementById('resultMessage').textContent = msgs[0];
+      document.getElementById('resultSub').textContent = msgs[1];
+    }
+
+    function restartQuiz() { startQuiz(); }
+    loadQuizzes();
+  </script>
+</body>
+</html>
