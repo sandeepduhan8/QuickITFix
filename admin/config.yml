@@ -2,6 +2,8 @@ backend:
   name: github
   repo: sandeepduhan8/QuickITFix
   branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
 
 media_folder: "assets/images"
 public_folder: "/assets/images"
