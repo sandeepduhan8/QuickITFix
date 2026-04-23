@@ -68,3 +68,49 @@ collections:
               - { label: "Initials", name: "initials", widget: "string" }
               - { label: "Role", name: "role", widget: "string" }
               - { label: "Bio", name: "bio", widget: "text" }
+
+- name: "quizzes"
+    label: "Quizzes"
+    label_singular: "Quiz"
+    folder: "_quizzes"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} — {{topic}}"
+    fields:
+      - { label: "Quiz Title", name: "title", widget: "string", hint: "e.g. CompTIA Network+ Practice Quiz" }
+      - label: "Topic"
+        name: "topic"
+        widget: "select"
+        options:
+          - { label: "Cybersecurity", value: "cybersecurity" }
+          - { label: "Cloud Computing", value: "cloud" }
+          - { label: "Networking", value: "networking" }
+          - { label: "Windows", value: "windows" }
+          - { label: "Linux", value: "linux" }
+          - { label: "DevOps", value: "devops" }
+          - { label: "AI & ML", value: "ai" }
+          - { label: "Hardware", value: "hardware" }
+          - { label: "Programming", value: "programming" }
+          - { label: "ITIL", value: "itil" }
+          - { label: "CompTIA", value: "comptia" }
+          - { label: "AWS", value: "aws" }
+          - { label: "Azure", value: "azure" }
+      - { label: "Difficulty", name: "difficulty", widget: "select", options: ["Beginner", "Intermediate", "Advanced"] }
+      - { label: "Duration (e.g. 10 mins)", name: "duration", widget: "string", default: "10 mins" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Published", name: "published", widget: "boolean", default: true }
+      - label: "Questions"
+        name: "questions"
+        widget: "list"
+        min: 1
+        max: 50
+        fields:
+          - { label: "Question", name: "question", widget: "string" }
+          - label: "Options"
+            name: "options"
+            widget: "list"
+            min: 2
+            max: 4
+            field: { label: "Option", name: "option", widget: "string" }
+          - { label: "Correct Answer (exact text of correct option)", name: "correct", widget: "string" }
+          - { label: "Explanation", name: "explanation", widget: "text", required: false, hint: "Shown after answering" }
