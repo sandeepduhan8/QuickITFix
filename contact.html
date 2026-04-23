@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — QuickITFix</title>
+  <meta name="description" content="Get in touch with QuickITFix — ask a question, suggest an article or join our community." />
+  <link rel="stylesheet" href="assets/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <header class="nav-wrap">
+    <nav class="nav container">
+      <a href="index.html" class="logo">Quick<span>IT</span>Fix</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="section-tag">Get In Touch</p>
+      <h1>Contact <span class="accent-text">Us</span></h1>
+      <p class="page-hero-sub">Have a question, want to contribute an article, suggest a topic, or just say hello? We'd love to hear from you.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact-layout">
+
+      <!-- FORM -->
+      <div class="contact-form-wrap">
+        <h2>Send Us a <span class="accent-text">Message</span></h2>
+        <p style="color:var(--text-muted);margin-bottom:2rem">Fill out the form and we'll get back to you within 24 hours.</p>
+        <form class="contact-form" id="contactForm" onsubmit="handleContact(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="John" required />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Doe" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="john@example.com" required />
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <select required>
+              <option value="" disabled selected>Select a topic</option>
+              <option>General Inquiry</option>
+              <option>Submit an Article</option>
+              <option>Report an Issue</option>
+              <option>Suggest a Topic</option>
+              <option>Forum Support</option>
+              <option>Partnership</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea rows="5" placeholder="Tell us what's on your mind..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">Send Message ✉️</button>
+          <div class="form-success" id="formSuccess">
+            ✅ Message sent! We'll get back to you within 24 hours.
+          </div>
+        </form>
+      </div>
+
+      <!-- INFO -->
+      <div class="contact-info">
+        <div class="contact-card">
+          <div class="contact-icon">📧</div>
+          <h3>Email Us</h3>
+          <p>hello@quickitfix.in</p>
+          <p style="color:var(--text-muted);font-size:.9rem">We reply within 24 hours</p>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">💬</div>
+          <h3>Community Forum</h3>
+          <p>Ask the community</p>
+          <p style="color:var(--text-muted);font-size:.9rem">Get answers from IT experts</p>
+          <a href="#" class="card-link" style="margin-top:.5rem;display:inline-block">Join Forum →</a>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">✍️</div>
+          <h3>Write for Us</h3>
+          <p>Share your expertise</p>
+          <p style="color:var(--text-muted);font-size:.9rem">We welcome guest contributors</p>
+          <a href="#" class="card-link" style="margin-top:.5rem;display:inline-block">Submit Article →</a>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">📍</div>
+          <h3>Location</h3>
+          <p>Gurugram, Haryana</p>
+          <p style="color:var(--text-muted);font-size:.9rem">India 🇮🇳</p>
+        </div>
+
+        <div class="contact-social">
+          <h3>Follow Us</h3>
+          <div class="social-row">
+            <a href="#" class="social-pill">𝕏 Twitter</a>
+            <a href="#" class="social-pill">in LinkedIn</a>
+            <a href="#" class="social-pill">⌥ GitHub</a>
+            <a href="#" class="social-pill">▶ YouTube</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq-section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Quick Answers</p>
+        <h2>Frequently Asked <span class="accent-text">Questions</span></h2>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Is QuickITFix free to use? <span class="faq-arrow">↓</span></button>
+          <div class="faq-a">Yes! All articles, guides, solutions and quizzes are completely free. We believe IT knowledge should be accessible to everyone.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Can I submit an article or guide? <span class="faq-arrow">↓</span></button>
+          <div class="faq-a">Absolutely. We welcome contributions from IT professionals and enthusiasts. Use the contact form above and select "Submit an Article" as the subject.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">How do I join the community forum? <span class="faq-arrow">↓</span></button>
+          <div class="faq-a">The forum is coming soon! Register your interest via the contact form and we'll notify you as soon as it launches.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">How often is content updated? <span class="faq-arrow">↓</span></button>
+          <div class="faq-a">New articles are published multiple times per week. Breaking news and security alerts are posted as they happen. Subscribe to our newsletter to stay current.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Do you cover certification exam prep? <span class="faq-arrow">↓</span></button>
+          <div class="faq-a">Yes! We have dedicated content for CompTIA A+, Network+, Security+, AWS, Azure and ITIL certifications including quizzes and learning paths.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Can I advertise or partner with QuickITFix? <span class="faq-arrow">↓</span></button>
+          <div class="faq-a">We're open to partnerships, sponsorships and collaborations with IT companies and education providers. Reach out via the contact form with "Partnership" as the subject.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">Quick<span>IT</span>Fix</a>
+        <p>Your trusted hub for IT knowledge, tech news, solutions, forums, and quizzes.</p>
+      </div>
+      <div class="footer-col"><h4>Explore</h4><ul><li><a href="blog.html">Articles</a></li><li><a href="services.html">Solutions</a></li><li><a href="services.html">Quizzes</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Topics</h4><ul><li><a href="blog.html">Cybersecurity</a></li><li><a href="blog.html">Cloud</a></li><li><a href="blog.html">Networking</a></li></ul></div>
+    </div>
+    <div class="footer-bottom container">
+      <p>© 2025 QuickITFix. All rights reserved.</p>
+      <div><a href="#">Privacy Policy</a> · <a href="#">Terms of Use</a></div>
+    </div>
+  </footer>
+
+  <script src="assets/script.js"></script>
+  <script>
+    function handleContact(e) {
+      e.preventDefault();
+      document.getElementById('formSuccess').style.display = 'block';
+      e.target.reset();
+      setTimeout(() => document.getElementById('formSuccess').style.display = 'none', 5000);
+    }
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const arrow = btn.querySelector('.faq-arrow');
+      const isOpen = answer.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-arrow').forEach(a => a.textContent = '↓');
+      if (!isOpen) { answer.classList.add('open'); arrow.textContent = '↑'; }
+    }
+  </script>
+</body>
+</html>
