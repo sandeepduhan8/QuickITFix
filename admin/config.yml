@@ -2,29 +2,20 @@ backend:
   name: github
   repo: sandeepduhan8/QuickITFix
   branch: main
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
 
 media_folder: "assets/images"
 public_folder: "/assets/images"
 
-site_url: https://quickitfix.in
-display_url: https://quickitfix.in
-logo_url: https://quickitfix.in/assets/images/logo.png
-
 collections:
 
-  # ========== BLOG POSTS ==========
   - name: "posts"
     label: "Blog Posts"
     label_singular: "Blog Post"
     folder: "_posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    preview_path: "blog.html"
-    summary: "{{title}} — {{date}}"
     fields:
-      - { label: "Title", name: "title", widget: "string", hint: "Article headline" }
+      - { label: "Title", name: "title", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - label: "Category"
         name: "category"
@@ -37,44 +28,35 @@ collections:
           - { label: "Linux", value: "linux" }
           - { label: "DevOps", value: "devops" }
           - { label: "AI & ML", value: "ai" }
-          - { label: "Hardware", value: "hardware" }
-          - { label: "Mobile Tech", value: "mobile" }
-          - { label: "IT Support", value: "support" }
-          - { label: "Programming", value: "programming" }
           - { label: "Tech News", value: "news" }
       - { label: "Author", name: "author", widget: "string", default: "Sandeep Duhan" }
-      - { label: "Read Time (e.g. 5 min)", name: "read_time", widget: "string", default: "5 min" }
-      - { label: "Featured Image", name: "thumbnail", widget: "image", required: false }
-      - { label: "Short Description", name: "description", widget: "text", hint: "Shown in article cards on blog page" }
-      - { label: "Featured Post?", name: "featured", widget: "boolean", default: false }
+      - { label: "Read Time", name: "read_time", widget: "string", default: "5 min" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Featured?", name: "featured", widget: "boolean", default: false }
       - { label: "Body", name: "body", widget: "markdown" }
 
-  # ========== PAGES ==========
   - name: "pages"
     label: "Pages"
     files:
-
       - label: "Homepage"
         name: "home"
         file: "_data/home.json"
         fields:
-          - { label: "Hero Title Line 1", name: "hero_title_1", widget: "string", default: "Your Ultimate" }
-          - { label: "Hero Title Line 2 (Accent)", name: "hero_title_2", widget: "string", default: "IT Knowledge" }
+          - { label: "Hero Title", name: "hero_title_1", widget: "string" }
+          - { label: "Hero Accent Text", name: "hero_title_2", widget: "string" }
           - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
-          - { label: "Stat 1 Number", name: "stat1_num", widget: "string", default: "500+" }
-          - { label: "Stat 1 Label", name: "stat1_label", widget: "string", default: "Articles" }
-          - { label: "Stat 2 Number", name: "stat2_num", widget: "string", default: "10K+" }
-          - { label: "Stat 2 Label", name: "stat2_label", widget: "string", default: "Readers" }
-          - { label: "Stat 3 Number", name: "stat3_num", widget: "string", default: "50+" }
-          - { label: "Stat 3 Label", name: "stat3_label", widget: "string", default: "Topics" }
-
+          - { label: "Stat 1 Number", name: "stat1_num", widget: "string" }
+          - { label: "Stat 1 Label", name: "stat1_label", widget: "string" }
+          - { label: "Stat 2 Number", name: "stat2_num", widget: "string" }
+          - { label: "Stat 2 Label", name: "stat2_label", widget: "string" }
+          - { label: "Stat 3 Number", name: "stat3_num", widget: "string" }
+          - { label: "Stat 3 Label", name: "stat3_label", widget: "string" }
       - label: "About Page"
         name: "about"
         file: "_data/about.json"
         fields:
           - { label: "Mission Title", name: "mission_title", widget: "string" }
           - { label: "Mission Text", name: "mission_text", widget: "text" }
-          - { label: "Mission Text 2", name: "mission_text2", widget: "text" }
           - label: "Team Members"
             name: "team"
             widget: "list"
@@ -83,37 +65,3 @@ collections:
               - { label: "Initials", name: "initials", widget: "string" }
               - { label: "Role", name: "role", widget: "string" }
               - { label: "Bio", name: "bio", widget: "text" }
-
-      - label: "Contact Page"
-        name: "contact"
-        file: "_data/contact.json"
-        fields:
-          - { label: "Email", name: "email", widget: "string", default: "hello@quickitfix.in" }
-          - { label: "Location", name: "location", widget: "string", default: "Gurugram, Haryana, India" }
-          - label: "FAQ Items"
-            name: "faqs"
-            widget: "list"
-            fields:
-              - { label: "Question", name: "question", widget: "string" }
-              - { label: "Answer", name: "answer", widget: "text" }
-
-  # ========== SERVICES ==========
-  - name: "services"
-    label: "Services"
-    files:
-      - label: "Services Page"
-        name: "services"
-        file: "_data/services.json"
-        fields:
-          - label: "Services List"
-            name: "services"
-            widget: "list"
-            fields:
-              - { label: "Number", name: "num", widget: "string" }
-              - { label: "Icon (emoji)", name: "icon", widget: "string" }
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Description", name: "description", widget: "text" }
-              - label: "Features"
-                name: "features"
-                widget: "list"
-                field: { label: "Feature", name: "feature", widget: "string" }
